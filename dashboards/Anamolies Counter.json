@@ -1,0 +1,108 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 38,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "df3wuhad8phc0d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-19174562009.patch2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "df3wuhad8phc0d"
+          },
+          "format": "table",
+          "hide": false,
+          "range": true,
+          "rawSql": "WITH cost_statistics AS (\r\n    SELECT\r\n        time,\r\n        instantaneous_actual_cost_inr,\r\n        AVG(instantaneous_actual_cost_inr) OVER () AS moving_avg,\r\n        STDDEV(instantaneous_actual_cost_inr) OVER () AS moving_stddev\r\n    FROM\r\n        solar_data9\r\n    WHERE\r\n        time <= CURRENT_TIMESTAMP\r\n),\r\nanomalies AS (\r\n    SELECT\r\n        time,\r\n        instantaneous_actual_cost_inr,\r\n        moving_avg,\r\n        moving_stddev,\r\n        CASE\r\n            WHEN ABS(instantaneous_actual_cost_inr - moving_avg) > 2 * moving_stddev THEN 'Anomaly'\r\n            ELSE 'Normal'\r\n        END AS anomaly_flag\r\n    FROM\r\n        cost_statistics\r\n)\r\nSELECT\r\n    COUNT(*) AS anomaly_count\r\nFROM\r\n    anomalies\r\nWHERE\r\n    anomaly_flag = 'Anomaly';",
+          "refId": "A"
+        }
+      ],
+      "title": "Anamolies Counter",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Anamolies Counter",
+  "uid": "be5wb5mwr0q9sa",
+  "version": 2
+}

@@ -1,0 +1,536 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 30,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "df3wuhad8phc0d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "vertical",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-19174562009.patch2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "df3wuhad8phc0d"
+          },
+          "format": "table",
+          "hide": false,
+          "range": true,
+          "rawSql": "SELECT \r\n    time, \r\n    device_1_consumption_kw AS \"Device 1 Consumption (kW)\",\r\n    device_2_consumption_kw AS \"Device 2 Consumption (kW)\",\r\n    device_3_consumption_kw AS \"Device 3 Consumption (kW)\",\r\n    device_4_consumption_kw AS \"Device 4 Consumption (kW)\"\r\nFROM \r\n    solar_data9\r\nWHERE \r\n    time >= (SELECT MAX(time)::date FROM solar_data9)\r\nORDER BY \r\n    time DESC;",
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "df3wuhad8phc0d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true
+      },
+      "pluginVersion": "12.4.0-19174562009.patch2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "df3wuhad8phc0d"
+          },
+          "format": "table",
+          "hide": false,
+          "range": true,
+          "rawSql": "SELECT \r\n    time, \r\n    device_1_consumption_kw AS \"Device 1 Consumption (kW)\",\r\n    device_2_consumption_kw AS \"Device 2 Consumption (kW)\",\r\n    device_3_consumption_kw AS \"Device 3 Consumption (kW)\",\r\n    device_4_consumption_kw AS \"Device 4 Consumption (kW)\"\r\nFROM \r\n    solar_data9\r\nWHERE \r\n    time >= (SELECT MAX(time)::date FROM solar_data9)\r\nORDER BY \r\n    time DESC;",
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "df3wuhad8phc0d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 0.1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 1 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": -1,
+                      "result": {
+                        "color": "orange",
+                        "index": 0,
+                        "text": "2"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 2 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "orange",
+                        "index": 0,
+                        "text": "3"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 3 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": -1,
+                      "result": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "0.1"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 4 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": -1,
+                      "result": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "0.005"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 11,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-19174562009.patch2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "df3wuhad8phc0d"
+          },
+          "format": "table",
+          "hide": false,
+          "range": true,
+          "rawSql": "SELECT \r\n    time, \r\n    device_1_consumption_kw AS \"Device 1 \",\r\n    device_2_consumption_kw AS \"Device 2 \",\r\n    device_3_consumption_kw AS \"Device 3 \",\r\n    device_4_consumption_kw AS \"Device 4 \"\r\nFROM \r\n    solar_data9\r\nWHERE \r\n    time = (SELECT MAX(time) FROM solar_data10 WHERE time <= CURRENT_TIMESTAMP);\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Wattage",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "df3wuhad8phc0d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 0.1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 1 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": -1,
+                      "result": {
+                        "color": "orange",
+                        "index": 0,
+                        "text": "2"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 2 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "orange",
+                        "index": 0,
+                        "text": "4"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 3 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": -1,
+                      "result": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "8"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device 4 "
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": -1,
+                      "result": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "1"
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "displayName"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 13,
+        "x": 11,
+        "y": 9
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-19174562009.patch2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "df3wuhad8phc0d"
+          },
+          "format": "table",
+          "hide": false,
+          "range": true,
+          "rawSql": "SELECT \r\n    time, \r\n    device_1_consumption_kw AS \"Device 1 \",\r\n    device_2_consumption_kw AS \"Device 2 \",\r\n    device_3_consumption_kw AS \"Device 3 \",\r\n    device_4_consumption_kw AS \"Device 4 \"\r\nFROM \r\n    solar_data9\r\nWHERE \r\n    time = (SELECT MAX(time) FROM solar_data10 WHERE time <= CURRENT_TIMESTAMP);\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Duration (hrs)",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2024-12-04T16:13:52.919Z",
+    "to": "2024-12-06T16:13:52.919Z"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "New dashboard",
+  "uid": "fe612q75pkqgwa",
+  "version": 2
+}

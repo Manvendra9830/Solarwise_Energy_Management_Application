@@ -1,0 +1,108 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 31,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "df3wuhad8phc0d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0-19174562009.patch2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "df3wuhad8phc0d"
+          },
+          "format": "table",
+          "hide": false,
+          "range": true,
+          "rawSql": "SELECT \r\n    -- battery_level_kwh AS \"Battery Level (%)\",\r\n    -- tou_rates_inr AS \"TOU Rates (INR)\",\r\n    Time AS \"Timestamp\",\r\n    CASE \r\n        WHEN battery_level_kwh = 100 AND instantaneous_solar_generation_kwh > 0 \r\n        THEN instantaneous_solar_generation_kwh  -- Energy sold to grid\r\n        ELSE 0  -- No energy sold\r\n    END AS \"Energy Sold to Grid (kWh)\",\r\n    CASE \r\n        WHEN battery_level_kwh = 100 AND instantaneous_solar_generation_kwh > 0 \r\n        THEN instantaneous_solar_generation_kwh * tou_rates_inr  -- Calculate cost\r\n        ELSE 0  -- No cost if no energy sold\r\n    END AS \"Revenue from Grid (INR)\"\r\nFROM \r\n    solar_data9\r\nORDER BY \r\n    Time DESC  -- Sort by newest first\r\nLIMIT 1;",
+          "refId": "A"
+        }
+      ],
+      "title": "Optimal Grid and Solar Usage",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Optimal Grid and Solar Usage",
+  "uid": "ae5wcjm8ffda8d",
+  "version": 2
+}

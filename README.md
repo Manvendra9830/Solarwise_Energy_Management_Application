@@ -1,5 +1,3 @@
-# SolarWise
-
 # SolarWise: AI-Powered Energy Management Solutions ☀️
 
 [![AWS](https://img.shields.io/badge/Cloud-AWS-orange)](https://aws.amazon.com/)  

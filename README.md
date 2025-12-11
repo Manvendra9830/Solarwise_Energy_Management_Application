@@ -1,9 +1,5 @@
 # SolarWise
 
-
-## 🌐 Deployment
-**Live Demo**: [Solarwise-Luminous-TechnoX-Techathon](https://luminous-techno-x-techathon-2024.vercel.app/) (Deployed on Vercel)
-
 # SolarWise: AI-Powered Energy Management Solutions ☀️
 
 [![AWS](https://img.shields.io/badge/Cloud-AWS-orange)](https://aws.amazon.com/)  
